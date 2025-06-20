@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Te Amo</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      cursor: pointer;
+    }
+
+    .falling {
+      position: absolute;
+      font-size: 24px;
+      color: pink;
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    .explosion {
+      position: absolute;
+      font-size: 20px;
+      color: red;
+      animation: explode 1s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes explode {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(3);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  // Função para criar efeito de "Te amo" caindo
+  function createFallingTeAmo() {
+    const el = document.createElement('div');
+    el.className = 'falling';
+    el.textContent = 'Te amo';
+    el.style.left = Math.random() * window.innerWidth + 'px';
+    el.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    document.body.appendChild(el);
+
+    setTimeout(() => {
+      el.remove();
+    }, 5000);
+  }
+
+  // Repetidamente criar as palavras caindo
+  setInterval(createFallingTeAmo, 200);
+
+  // Explosão de "Te amo" no clique
+  document.body.addEventListener('click', (e) => {
+    for (let i = 0; i < 20; i++) {
+      const el = document.createElement('div');
+      el.className = 'explosion';
+      el.textContent = 'Te amo';
+      el.style.left = e.clientX + 'px';
+      el.style.top = e.clientY + 'px';
+      el.style.color = hsl(${Math.random() * 360}, 100%, 70%);
+      el.style.transform = translate(${(Math.random() - 0.5) * 200}px, ${(Math.random() - 0.5) * 200}px);
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1000);
+    }
+  });
+</script>
+
+</body>
+</html>
